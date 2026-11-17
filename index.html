@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farias Godinho | Higienização de Estofados e Automotiva</title>
+  <meta name="description" content="Higienização profissional de sofás, estofados e veículos em São Paulo. Limpeza profunda com qualidade e confiança.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070B14;
+      --bg-soft: #0C1220;
+      --card: #111827;
+      --card-hover: #1A2332;
+      --red: #E30613;
+      --red-glow: rgba(227, 6, 19, 0.25);
+      --blue: #00B4D8;
+      --blue-light: #48CAE4;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+      --border: #1E293B;
+      --green: #25D366;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ========== SCROLL ANIMATIONS ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-70px) rotate(-2deg);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0) rotate(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(70px) rotate(2deg);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0) rotate(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.85) translateY(30px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.12s !important; }
+    .delay-2 { transition-delay: 0.24s !important; }
+    .delay-3 { transition-delay: 0.36s !important; }
+    .delay-4 { transition-delay: 0.48s !important; }
+    .delay-5 { transition-delay: 0.60s !important; }
+    .delay-6 { transition-delay: 0.72s !important; }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 60px var(--red-glow); }
+      50% { box-shadow: 0 0 90px rgba(227, 6, 19, 0.4); }
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    /* Hero badge pulse */
+    .hero-badge {
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    /* Stat numbers pop */
+    .stat-number {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stat-item:hover .stat-number {
+      transform: scale(1.15);
+    }
+
+    /* ========== NAV ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 11, 20, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid transparent;
+      padding: 12px 0;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+      background: rgba(7, 11, 20, 0.95);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .nav-logo {
+      height: 48px;
+      width: auto;
+      border-radius: 6px;
+      transition: transform 0.3s;
+    }
+    .nav-logo:hover { transform: scale(1.03); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color 0.25s, background 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-cta {
+      background: var(--red) !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+      padding: 9px 18px !important;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s !important;
+    }
+
+    .nav-cta:hover {
+      background: #c00510 !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(227,6,19,0.35);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 100px 0 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(7, 11, 20, 0.75) 0%,
+        rgba(7, 11, 20, 0.65) 40%,
+        rgba(7, 11, 20, 0.85) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(227,6,19,0.12);
+      border: 1px solid rgba(227,6,19,0.3);
+      color: #ff6b75;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 30px;
+      margin-bottom: 24px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 5.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: -0.6px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--blue-light), #fff 55%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 26px;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-green:hover {
+      background: #1EBE57;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37,211,102,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      background: rgba(0,180,216,0.08);
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 52px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 90px 0; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.65rem, 4vw, 2.3rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+      line-height: 1.2;
+      letter-spacing: -0.4px;
+    }
+
+    .section-title span { color: var(--red); }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-header .section-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== SIMULADOR ========== */
+    .simulador {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px 28px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 0 80px var(--red-glow);
+      transition: box-shadow 0.4s;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .form-card:hover {
+      box-shadow: 0 0 100px rgba(227, 6, 19, 0.35);
+    }
+
+    .step-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-number {
+      background: var(--red);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .input-group { margin-bottom: 18px; }
+
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .input-group input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,180,216,0.15);
+    }
+
+    .input-group input::placeholder { color: #64748B; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .select-card {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .select-card:hover {
+      border-color: #334155;
+      background: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .select-card.active {
+      border-color: var(--red);
+      background: rgba(227, 6, 19, 0.12);
+      box-shadow: 0 0 0 1px var(--red), 0 8px 24px rgba(227,6,19,0.2);
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .select-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      display: block;
+      transition: transform 0.25s;
+    }
+
+    .select-card.active .icon {
+      transform: scale(1.15);
+    }
+
+    .select-card .label {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .summary {
+      background: var(--bg);
+      border: 1px dashed #334155;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .summary-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .summary-content {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .summary-content strong { color: var(--red); }
+    .summary-content .muted { color: var(--text-muted); }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: inherit;
+    }
+
+    .btn-whatsapp:hover:not(:disabled) {
+      background: #1EBE57;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(37,211,102,0.35);
+    }
+
+    .btn-whatsapp:disabled {
+      background: #334155;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    /* ========== RESULTADO ========== */
+    .ba-single {
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .ba-single:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+    }
+
+    .ba-single img {
+      width: 100%;
+      aspect-ratio: 16/11;
+      object-fit: cover;
+    }
+
+    .ba-caption {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 18px;
+    }
+
+    /* ========== PORTFÓLIO ========== */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      transform: translateY(10px);
+      transition: transform 0.35s;
+    }
+
+    .portfolio-item:hover .portfolio-label {
+      transform: translateY(0);
+    }
+
+    /* ========== SERVIÇOS ========== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 34px 28px;
+      transition: border-color 0.3s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(227,6,19,0.5);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 24px 55px rgba(0,0,0,0.4);
+    }
+
+    .service-icon {
+      font-size: 2.3rem;
+      margin-bottom: 16px;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.12);
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+
+    .service-card ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .service-card ul li {
+      padding: 5px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .service-card ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* ========== SOBRE ========== */
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 44px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      line-height: 1.85;
+    }
+
+    .about-text p { margin-bottom: 18px; }
+    .about-text strong { color: var(--text); }
+
+    .about-highlight {
+      background: rgba(227, 6, 19, 0.1);
+      border-left: 4px solid var(--red);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 28px 0;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+
+    .about-closing {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.08rem;
+    }
+
+    /* ========== INSTAGRAM ========== */
+    .ig-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 0 0 1px rgba(227, 6, 19, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .ig-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+
+    .ig-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .ig-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--red);
+      flex-shrink: 0;
+    }
+
+    .ig-username {
+      font-weight: 700;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ig-verified { color: var(--blue); font-size: 0.95rem; }
+    .ig-name { color: var(--text-muted); font-size: 0.9rem; }
+
+    .ig-stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .ig-stats strong { color: var(--text); }
+
+    .ig-bio {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .ig-bio span { display: block; }
+
+    .ig-follow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 20px;
+      border-radius: 10px;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .ig-follow:hover {
+      background: #c00510;
+      transform: translateY(-1px);
+    }
+
+    /* ========== DEPOIMENTOS ========== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,180,216,0.3);
+    }
+
+    .testimonial-text {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .testimonial-name { font-weight: 600; font-size: 0.95rem; }
+    .testimonial-detail { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ========== DIFERENCIAIS ========== */
+    .diferenciais-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .dif-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 22px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .dif-card:hover {
+      border-color: rgba(0,180,216,0.4);
+      transform: translateY(-4px);
+    }
+
+    .dif-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      transition: transform 0.3s;
+    }
+
+    .dif-card:hover .dif-icon {
+      transform: scale(1.15);
+    }
+
+    .dif-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 10px; }
+    .dif-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ========== FAQ ========== */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .faq-item.open {
+      border-color: rgba(227,6,19,0.4);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 20px 22px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover { background: rgba(255,255,255,0.02); }
+
+    .faq-icon {
+      font-size: 1.3rem;
+      color: var(--red);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item.open .faq-answer { max-height: 320px; }
+
+    .faq-answer-inner {
+      padding: 0 22px 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      background: linear-gradient(180deg, rgba(227,6,19,0.12) 0%, transparent 100%);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 90px 0;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.65rem, 4vw, 2.3rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 36px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 56px;
+      width: auto;
+      margin: 0 auto 18px;
+      opacity: 0.9;
+      border-radius: 6px;
+    }
+
+    .footer-info {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .footer-info a { color: var(--blue); }
+    .footer-info a:hover { text-decoration: underline; }
+
+    .footer-copy {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #64748B;
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 16px;
+        gap: 4px;
+        animation: slideDown 0.3s ease;
+      }
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .nav-toggle { display: block; }
+      .nav-inner { position: relative; }
+    }
+
+    @media (max-width: 600px) {
+      .cards-grid { gap: 8px; }
+      .select-card { padding: 12px 4px; }
+      .select-card .label { font-size: 0.75rem; }
+      .stats { gap: 28px; }
+      .about-card { padding: 28px 20px; }
+      section { padding: 70px 0; }
+      .hero { padding: 55px 0 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#">
+        <img src="logo.png" alt="Farias Godinho" class="nav-logo">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#orcamento">Orçamento</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://wa.me/5511995992689" target="_blank" class="nav-cta">WhatsApp</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="sofa-azul.jpg">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-badge reveal">Higienização Profissional</div>
+      <h1 class="reveal delay-1">Cuidamos do seu <span>conforto</span> com qualidade e confiança</h1>
+      <p class="hero-sub reveal delay-2">Higienização profunda de sofás, estofados e veículos. Serviço feito com dedicação, técnica e carinho em cada detalhe.</p>
+      
+      <div class="hero-actions reveal delay-3">
+        <a href="#orcamento" class="btn btn-green">Solicitar Orçamento</a>
+        <a href="#portfolio" class="btn btn-outline">Ver Portfólio</a>
+      </div>
+
+      <div class="stats reveal delay-4">
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Dedicação</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">SP</div>
+          <div class="stat-label">e Região</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">★</div>
+          <div class="stat-label">Qualidade</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="simulador" id="orcamento">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Rápido & Prático</div>
+        <h2 class="section-title">Simulador de <span>Orçamento</span></h2>
+        <p class="section-desc">Selecione o serviço e o tamanho para enviar sua solicitação diretamente no WhatsApp em menos de 1 minuto.</p>
+      </div>
+
+      <div class="form-card reveal-scale">
+        <form id="orcamentoForm">
+          <div class="step-title"><span class="step-number">1</span> Seus dados</div>
+
+          <div class="input-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+          </div>
+
+          <div class="input-group">
+            <label for="endereco">Endereço / Bairro</label>
+            <input type="text" id="endereco" placeholder="Ex: Rua das Flores, 123 - Centro" required>
+          </div>
+
+          <div class="step-title"><span class="step-number">2</span> Selecione o Serviço</div>
+
+          <div class="cards-grid" id="servicoGrid">
+            <div class="select-card" data-value="Leve">
+              <span class="icon">🧼</span>
+              <span class="label">Leve</span>
+            </div>
+            <div class="select-card" data-value="Intermediário">
+              <span class="icon">✨</span>
+              <span class="label">Intermediário</span>
+            </div>
+            <div class="select-card" data-value="Pesado">
+              <span class="icon">💪</span>
+              <span class="label">Pesado</span>
+            </div>
+          </div>
+
+          <div class="step-title"><span class="step-number">3</span> Selecione o Tamanho</div>
+
+          <div class="cards-grid" id="tamanhoGrid">
+            <div class="select-card" data-value="Pequeno">
+              <span class="icon">🛋️</span>
+              <span class="label">Pequeno</span>
+            </div>
+            <div class="select-card" data-value="Médio">
+              <span class="icon">🪑</span>
+              <span class="label">Médio</span>
+            </div>
+            <div class="select-card" data-value="Grande">
+              <span class="icon">🛏️</span>
+              <span class="label">Grande</span>
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="summary-title">Resumo do Orçamento</div>
+            <div class="summary-content" id="resumo">Preencha os campos acima para ver o resumo</div>
+          </div>
+
+          <button type="button" class="btn-whatsapp" id="btnWhatsapp" disabled>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            ENVIAR PARA WHATSAPP
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="resultado">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Resultado Impecável</div>
+        <h2 class="section-title">Transformação <span>Real</span></h2>
+        <p class="section-desc">Higienização completa de estofados de ônibus e veículos.</p>
+      </div>
+
+      <div class="ba-single reveal-scale">
+        <img src="onibus-completo.jpg" alt="Higienização de bancos de ônibus - Farias Godinho">
+      </div>
+      <p class="ba-caption reveal">Higienização completa de estofados de ônibus</p>
+    </div>
+  </section>
+
+  <!-- PORTFÓLIO -->
+  <section id="portfolio" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Nossos Trabalhos</div>
+        <h2 class="section-title">Portfólio <span>Farias Godinho</span></h2>
+        <p class="section-desc">Alguns dos serviços realizados com qualidade e cuidado.</p>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-item reveal delay-1">
+          <img src="seats-before.jpg" alt="Bancos de ônibus">
+          <div class="portfolio-overlay"><span class="portfolio-label">Bancos de ônibus</span></div>
+        </div>
+        <div class="portfolio-item reveal delay-2">
+          <img src="sofa-azul.jpg" alt="Sofá azul higienizado">
+          <div class="portfolio-overlay"><span class="portfolio-label">Sofá 3 lugares</span></div>
+        </div>
+        <div class="portfolio-item reveal delay-3">
+          <img src="sofa-limpo.jpg" alt="Sofá bege limpo">
+          <div class="portfolio-overlay"><span class="portfolio-label">Sofá reclinável</span></div>
+        </div>
+        <div class="portfolio-item reveal delay-4">
+          <img src="colchao.jpg" alt="Colchão higienizado">
+          <div class="portfolio-overlay"><span class="portfolio-label">Colchão</span></div>
+        </div>
+        <div class="portfolio-item reveal delay-5">
+          <img src="poltronas.jpg" alt="Poltronas azuis">
+          <div class="portfolio-overlay"><span class="portfolio-label">Poltronas</span></div>
+        </div>
+        <div class="portfolio-item reveal delay-6">
+          <img src="onibus-completo.jpg" alt="Interior de ônibus">
+          <div class="portfolio-overlay"><span class="portfolio-label">Interior completo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Nossas Especialidades</div>
+        <h2 class="section-title">Serviços de <span>Alta Qualidade</span></h2>
+        <p class="section-desc">Soluções completas para higienizar e revitalizar seus estofados e veículos.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal delay-1">
+          <div class="service-icon float">🛋️</div>
+          <h3>Higienização de Sofás</h3>
+          <p>Limpeza profunda que remove sujeira, odores e ácaros, devolvendo o conforto e a aparência original.</p>
+          <ul>
+            <li>Remoção de manchas</li>
+            <li>Eliminação de odores</li>
+            <li>Proteção do tecido</li>
+          </ul>
+        </div>
+        <div class="service-card reveal delay-2">
+          <div class="service-icon float">🛏️</div>
+          <h3>Colchões e Estofados</h3>
+          <p>Higienização completa de colchões, poltronas, cadeiras e outros estofados da sua casa.</p>
+          <ul>
+            <li>Limpeza profunda</li>
+            <li>Controle de ácaros</li>
+            <li>Secagem rápida</li>
+          </ul>
+        </div>
+        <div class="service-card reveal delay-3">
+          <div class="service-icon float">🚗</div>
+          <h3>Higienização Automotiva</h3>
+          <p>Limpeza interna de veículos: bancos, teto, carpete e painéis com produtos específicos.</p>
+          <ul>
+            <li>Bancos e estofados</li>
+            <li>Remoção de odores</li>
+            <li>Acabamento impecável</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Nossa História</div>
+        <h2 class="section-title">Sobre <span>Nós</span></h2>
+      </div>
+
+      <div class="about-card reveal">
+        <div class="about-text">
+          <p>A <strong>Farias Godinho Higienização</strong> nasceu de um sonho: construir nosso próprio negócio e oferecer um serviço feito com dedicação, qualidade e confiança.</p>
+          <p>Tudo começou quando, em um período de desemprego, tive a oportunidade de trabalhar em uma tapeçaria. Foi ali que conheci melhor o universo dos estofados, aprendendo sobre tecidos, espumas e os cuidados necessários com cada material.</p>
+          <p>A curiosidade pela higienização surgiu ao observar profissionais realizando esse trabalho. Até que apareceu a oportunidade de realizar nosso primeiro serviço. Eu e minha esposa, <strong>Rosana</strong>, aceitamos o desafio, mesmo sem experiência. Tivemos dificuldades, cometemos erros e precisamos voltar para finalizar o trabalho — mas foi justamente ali que percebemos que poderíamos aprender e transformar aquela oportunidade em uma profissão.</p>
+          <p>A partir de então, começamos a estudar, pesquisar técnicas, produtos e equipamentos. Com o apoio e a iniciativa da Rosana, fomos investindo aos poucos no que era necessário para crescer. No início, cobramos valores baixos e realizamos serviços praticamente pelo custo, porque nosso objetivo era adquirir experiência, conquistar confiança e entregar cada vez mais qualidade.</p>
+          <p>Foi assim, com estudo, persistência, dedicação e muito trabalho, que nasceu a Farias Godinho Higienização.</p>
+          <div class="about-highlight">
+            Mais do que higienizar estofados, nossa missão é cuidar do que faz parte da sua casa e da sua história.
+          </div>
+          <p>Hoje, temos orgulho de olhar para trás e ver o quanto evoluímos. Continuamos buscando aperfeiçoamento para oferecer aos nossos clientes um atendimento de confiança e um serviço realizado com cuidado em cada detalhe.</p>
+          <p class="about-closing">
+            Farias Godinho Higienização — uma empresa que nasceu de um sonho e cresce todos os dias através do nosso compromisso com você.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Perfil Oficial</div>
+        <h2 class="section-title">Nosso Instagram <span>@fariasgodinhoh</span></h2>
+        <p class="section-desc">Acompanhe nossos trabalhos e novidades diretamente no perfil oficial.</p>
+      </div>
+
+      <div class="ig-card reveal-scale">
+        <div class="ig-top">
+          <img src="logo.png" alt="Farias Godinho" class="ig-avatar">
+          <div>
+            <div class="ig-username">fariasgodinhoh <span class="ig-verified">✓</span></div>
+            <div class="ig-name">Farias Godinho Higienização</div>
+            <div class="ig-stats">
+              <span><strong>—</strong> publicações</span>
+              <span><strong>—</strong> seguidores</span>
+            </div>
+          </div>
+        </div>
+        <div class="ig-bio">
+          <span>🛋️ Higienização de Sofás e Estofados</span>
+          <span>✨ Limpeza profunda e remoção de sujeiras</span>
+          <span>🚗 Higienização automotiva</span>
+          <span>📍 São Paulo e região</span>
+        </div>
+        <a href="https://www.instagram.com/fariasgodinhoh/" target="_blank" rel="noopener" class="ig-follow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          SEGUIR NO INSTAGRAM
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Depoimentos Reais</div>
+        <h2 class="section-title">O que dizem <span>nossos clientes</span></h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal delay-1">
+          <p class="testimonial-text">"Contratei a higienização do sofá e fiquei impressionada com o resultado. Ficou como novo! Atendimento super atencioso."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MC</div>
+            <div>
+              <div class="testimonial-name">Mariana C.</div>
+              <div class="testimonial-detail">Sofá 3 lugares</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal delay-2">
+          <p class="testimonial-text">"Fizeram a limpeza interna do meu carro. Tirou aquele cheiro de umidade que eu não conseguia eliminar. Recomendo demais!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RS</div>
+            <div>
+              <div class="testimonial-name">Roberto S.</div>
+              <div class="testimonial-detail">Higienização automotiva</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal delay-3">
+          <p class="testimonial-text">"Profissionais sérios e cuidadosos. Higienizaram o colchão e as poltronas. Casa ficou com cheiro bom e limpa de verdade."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AL</div>
+            <div>
+              <div class="testimonial-name">Ana L.</div>
+              <div class="testimonial-detail">Colchão + poltronas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section id="diferenciais">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Por que nos escolher</div>
+        <h2 class="section-title">Nossos <span>Diferenciais</span></h2>
+      </div>
+
+      <div class="diferenciais-grid">
+        <div class="dif-card reveal delay-1">
+          <div class="dif-icon">❤️</div>
+          <h3>Feito com Dedicação</h3>
+          <p>Cada serviço é realizado com cuidado e atenção aos detalhes, como se fosse para a nossa própria casa.</p>
+        </div>
+        <div class="dif-card reveal delay-2">
+          <div class="dif-icon">🧪</div>
+          <h3>Produtos de Qualidade</h3>
+          <p>Utilizamos produtos específicos e profissionais, seguros para tecidos, espumas e a saúde da família.</p>
+        </div>
+        <div class="dif-card reveal delay-3">
+          <div class="dif-icon">🏠</div>
+          <h3>Atendimento em Casa</h3>
+          <p>Vamos até você. Higienizamos no conforto da sua residência, com praticidade e segurança.</p>
+        </div>
+        <div class="dif-card reveal delay-4">
+          <div class="dif-icon">📈</div>
+          <h3>Em Constante Evolução</h3>
+          <p>Estudamos e aprimoramos técnicas continuamente para entregar sempre o melhor resultado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Dúvidas Frequentes</div>
+        <h2 class="section-title">Perguntas <span>Respondidas</span></h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal delay-1">
+          <button class="faq-question">Quanto tempo demora a higienização? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">O tempo varia conforme o tamanho e o estado do estofado. Em média, um sofá de 3 lugares leva entre 1h30 e 3 horas. O tempo de secagem completa costuma ser de 4 a 8 horas, dependendo das condições do ambiente.</div></div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <button class="faq-question">Vocês atendem em domicílio? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sim! Atendemos em residências e comércios em São Paulo e região. Levamos todo o equipamento necessário e realizamos o serviço no local.</div></div>
+        </div>
+        <div class="faq-item reveal delay-3">
+          <button class="faq-question">A higienização remove manchas e odores? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sim. Utilizamos técnicas e produtos específicos para remoção de manchas, odores de umidade, comida, pets e outros. O resultado depende do tipo e da antiguidade da mancha, mas na maioria dos casos o resultado é excelente.</div></div>
+        </div>
+        <div class="faq-item reveal delay-4">
+          <button class="faq-question">Como faço para solicitar um orçamento? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Use o Simulador de Orçamento aqui no site ou chame diretamente no WhatsApp (11) 99599-2689. Envie fotos se possível para agilizarmos o atendimento.</div></div>
+        </div>
+        <div class="faq-item reveal delay-5">
+          <button class="faq-question">Os produtos são seguros para crianças e pets? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sim. Trabalhamos com produtos profissionais de qualidade, formulados para serem eficazes na limpeza e seguros após a secagem, adequados para ambientes com crianças e animais de estimação.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="reveal">Pronto para revitalizar seus estofados?</h2>
+      <p class="reveal delay-1">Fale agora conosco e receba um atendimento personalizado com carinho e profissionalismo.</p>
+      <div class="cta-buttons reveal delay-2">
+        <a href="https://wa.me/5511995992689?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn btn-green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chamar no WhatsApp
+        </a>
+        <a href="#orcamento" class="btn btn-outline">Fazer Orçamento</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <img src="logo.png" alt="Farias Godinho" class="footer-logo">
+      <p class="footer-info">WhatsApp: <a href="https://wa.me/5511995992689">(11) 99599-2689</a></p>
+      <p class="footer-info">Instagram: <a href="https://www.instagram.com/fariasgodinhoh/" target="_blank">@fariasgodinhoh</a></p>
+      <p class="footer-info">São Paulo e região</p>
+      <p class="footer-copy">© 2026 Farias Godinho Higienização. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Scroll Animations (Intersection Observer) =====
+    const observerOptions = {
+      threshold: 0.08,
+      rootMargin: '0px 0px -20px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Trigger hero animations immediately
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+    }, 100);
+
+    // ===== Nav scroll effect =====
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // ===== Mobile menu =====
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    // ===== Form =====
+    const state = { nome: '', endereco: '', servico: '', tamanho: '' };
+
+    function setupCards(gridId, key) {
+      document.getElementById(gridId).querySelectorAll('.select-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.getElementById(gridId).querySelectorAll('.select-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          state[key] = card.dataset.value;
+          updateResumo();
+        });
+      });
+    }
+
+    setupCards('servicoGrid', 'servico');
+    setupCards('tamanhoGrid', 'tamanho');
+
+    document.getElementById('nome').addEventListener('input', e => { state.nome = e.target.value.trim(); updateResumo(); });
+    document.getElementById('endereco').addEventListener('input', e => { state.endereco = e.target.value.trim(); updateResumo(); });
+
+    function updateResumo() {
+      const resumo = document.getElementById('resumo');
+      const btn = document.getElementById('btnWhatsapp');
+      const hasAll = state.nome && state.endereco && state.servico && state.tamanho;
+
+      if (!state.nome && !state.endereco && !state.servico && !state.tamanho) {
+        resumo.innerHTML = 'Preencha os campos acima para ver o resumo';
+        btn.disabled = true;
+        return;
+      }
+
+      let html = '';
+      if (state.nome) html += '<div><span class="muted">Nome:</span> <strong>' + state.nome + '</strong></div>';
+      if (state.endereco) html += '<div><span class="muted">Endereço:</span> <strong>' + state.endereco + '</strong></div>';
+      if (state.servico) html += '<div><span class="muted">Serviço:</span> <strong>' + state.servico + '</strong></div>';
+      if (state.tamanho) html += '<div><span class="muted">Tamanho:</span> <strong>' + state.tamanho + '</strong></div>';
+      resumo.innerHTML = html;
+      btn.disabled = !hasAll;
+    }
+
+    document.getElementById('btnWhatsapp').addEventListener('click', () => {
+      if (!state.nome || !state.endereco || !state.servico || !state.tamanho) return;
+      const msg = 'Olá! Gostaria de solicitar um orçamento:\n\n*Nome:* ' + state.nome + '\n*Endereço:* ' + state.endereco + '\n*Serviço:* ' + state.servico + '\n*Tamanho:* ' + state.tamanho + '\n\nAguardo o retorno!';
+      window.open('https://wa.me/5511995992689?text=' + encodeURIComponent(msg), '_blank');
+    });
+
+    // ===== FAQ =====
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
